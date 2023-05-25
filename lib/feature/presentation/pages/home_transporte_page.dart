@@ -1,11 +1,11 @@
-import 'package:clean_app/feature/presentation/blocs/transporte_bloc.dart';
-import 'package:clean_app/feature/presentation/check_conection/warning_widget_value_notifier.dart';
-
 import 'package:clean_app/feature/presentation/pages/card_transporte.dart';
+import 'package:clean_app/feature/presentation/check_conection/warning_widget_value_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quickalert/quickalert.dart';
+
+import '../blocs/transporte/transporte_bloc.dart';
 
 class HomeTransportePage extends StatefulWidget {
   const HomeTransportePage({super.key});
@@ -41,8 +41,8 @@ class _HomeTransportePageState extends State<HomeTransportePage> {
                     width: 350,
                     child: Row(
                       children: [
-                        Column(
-                          children: const [
+                         Column(
+                          children:const [
                             Text(
                               'VI',
                               style: TextStyle(
@@ -208,32 +208,40 @@ class _HomeTransportePageState extends State<HomeTransportePage> {
                   )
                 ],
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 20),
-                width: double.infinity,
-                height: 600,
-                  color: Colors.amber,
-                child: BlocBuilder<TransporteBloc, TransporteState>(
+              RefreshIndicator(
+                onRefresh: () async {
+                  context.read<TransporteBloc>().add(GetTransporte());
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  width: double.infinity,
+                  height: 600,
+                  child: BlocBuilder<TransporteBloc, TransporteState>(
                     builder: (context, state) {
-                  if (state is Loading) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        color: Color.fromRGBO(242, 191, 24, 1),
-                      ),
-                    );
-                  } else if (state is Loaded) {
-                    return CardTransporte(listTransporte: state.transporte);
-                  } else if (state is Error) {
-                    return Center(
-                      child: Text(
-                        state.error.toString(),
-                        style: const TextStyle(color: Colors.red),
-                      ),
-                    );
-                  }else{
-                    return Container();
-                  }
-                },),
+                      if (state is Loading ) {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: Color.fromRGBO(242, 191, 24, 1),
+                          ),
+                        );
+                      } else if (state is Loaded) {
+                        return CardTransporte(listTransporte: state.transporte);
+                      }
+                      else if (state is Error) {
+                        return Center(
+                          child: Text(
+                            state.error.toString(),
+                            style: const TextStyle(color: Colors.red),
+                          ),
+                        );
+                      }  else {
+                        return const Center(
+                          child: Text('No data in server'),
+                        );
+                      }
+                    },
+                  ),
+                ),
               ),
             ],
           ),

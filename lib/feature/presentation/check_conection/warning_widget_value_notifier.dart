@@ -33,7 +33,7 @@ class _WarningWidgetValueNotifierState extends State<WarningWidgetValueNotifier>
           visible: isShowing,
           child: Container(
             padding: const EdgeInsets.all(16),
-            height: 60,
+            height: 55,
             color: status == ConnectionStatus.online ? Colors.green : Colors.red,
             child: Row(
               children: [

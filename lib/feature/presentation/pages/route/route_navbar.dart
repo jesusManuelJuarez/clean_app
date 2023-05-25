@@ -1,4 +1,5 @@
 import 'package:clean_app/feature/presentation/pages/home_transporte_page.dart';
+import 'package:clean_app/feature/presentation/pages/register_home_transporte_page.dart';
 import 'package:flutter/widgets.dart';
 
 class RouteNavBar extends StatelessWidget {
@@ -11,6 +12,7 @@ class RouteNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> listaViews = [
       const HomeTransportePage(),
+      const RegisterHomeTransportePage()
     ];
     return listaViews[index];
   }

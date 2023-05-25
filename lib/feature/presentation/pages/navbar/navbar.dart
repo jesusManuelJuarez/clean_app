@@ -32,16 +32,8 @@ class _NavBarState extends State<NavBar> {
           label: "Transporte",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.abc,color: (index==0)?Colors.amber:Colors.black12,),
-          label: 'Renta',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.abc,color: (index==0)?Colors.amber:Colors.black12,),
-          label: "Home",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.abc,color: (index==0)?Colors.amber:Colors.black12,),
-          label: 'Historial',
+          icon: Icon(Icons.app_registration_rounded,color: (index==1)?Colors.amber:Colors.black12,),
+          label: 'Registro',
         ),
       ],
     );

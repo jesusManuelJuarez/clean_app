@@ -12,4 +12,18 @@ class TransporteRepositoryImpl implements TransporteRepository{
     return await transporteRemoteDataSource.getTransporte();
   }
   
+  @override
+  Future<void> createTransporte(Transporte transporte) async{
+    return await transporteRemoteDataSource.createTransporte(transporte);
+  }
+  
+  @override
+  Future<void> deleteTransporte(String id) async {
+    return await transporteRemoteDataSource.deleteTransporte(id);
+  }
+
+  @override
+  Future<void>updateTransporte(Transporte transporte) async{
+    return await transporteRemoteDataSource.updateTransporte(transporte);
+  } 
 }

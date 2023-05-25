@@ -50,4 +50,16 @@ class TransporteModel extends Transporte {
       id: transporte.id,
     );
   }
+  Map<String, dynamic> toJson() {
+    return {
+      'nombreEmpresa': nombreEmpresa,
+      'transmision': trasmision,
+      'ac': ac,
+      'numAsientos': numAsientos,
+      'modelo': modelo,
+      'precio': precio,
+      'detalles': detalles,
+      'disponible': disponible
+    };
+  }
 }

@@ -1,5 +1,8 @@
 import 'package:clean_app/feature/domain/entities/transporte.dart';
+import 'package:clean_app/feature/presentation/blocs/transporte/transporte_bloc.dart';
+import 'package:clean_app/feature/presentation/pages/edit_transporte_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,7 +25,7 @@ class _CardTransporteState extends State<CardTransporte> {
                 Transporte data = widget.listTransporte[index];
                 return Container(
                   margin: const EdgeInsets.only(bottom: 10),
-                  width: 300,
+                  width: 350,
                   height: 270,
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(
@@ -67,8 +70,7 @@ class _CardTransporteState extends State<CardTransporte> {
                         child: SizedBox(
                           width: 300,
                           height: 250,
-                          child: SvgPicture.asset(
-                              'assets/card_car.svg'),
+                          child: SvgPicture.asset('assets/card_car.svg'),
                         ),
                       ),
                       Positioned(
@@ -140,7 +142,7 @@ class _CardTransporteState extends State<CardTransporte> {
                       ),
                       Positioned(
                         top: 220,
-                        left: 190,
+                        left: 120,
                         child: Container(
                           width: 150,
                           decoration: const BoxDecoration(
@@ -154,6 +156,49 @@ class _CardTransporteState extends State<CardTransporte> {
                             child: const Text('¡Rentar ahora!'),
                           ),
                         ),
+                      ),
+                      Positioned(
+                        top: 220,
+                        left: 275,
+                        child: Container(
+                          width: 70,
+                          decoration: const BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              context.read<TransporteBloc>().add(PressDeleteUserButton(id: data.id));
+                              context.read<TransporteBloc>().add(GetTransporte());
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: const StadiumBorder(),
+                              backgroundColor: Colors.red
+                            ),
+                            child: const Icon(Icons.delete),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 220,
+                        left: 350,
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: 55,
+                          decoration: const BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Route route = MaterialPageRoute(builder: (context)=>EditTransportePage(transporte: data));
+                              Navigator.push(context, route);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: const StadiumBorder(),
+                              backgroundColor: Colors.green
+                            ),
+                            child: const Icon(Icons.edit),
+                          ),
+                        ),
                       )
                     ],
                   ),
@@ -165,4 +210,5 @@ class _CardTransporteState extends State<CardTransporte> {
             ),
     );
   }
+
 }
